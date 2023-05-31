@@ -10,7 +10,7 @@ class InfoController extends Controller
 {
     public function index()
     {
-        $infos = Info::orderBy('id', 'DESC')->get();
+        $infos = Info::orderBy('id', 'DESC')->paginate(2);
 
         return view('admin.infos.index', compact('infos'));
     }
@@ -22,6 +22,15 @@ class InfoController extends Controller
 
     public function store(Request $request)
     {
+        $requestData = $request->all();
+
+        if($request->hasFile('icon'))
+        {
+            $file = request()->file('icon');
+            $fileName = time().'-'.$file->getClientoriginalName();
+            $file->move('files/', $fileName);
+            $requestData['icon'] = $fileName;
+        }
         Info::create($request->all());
 
         return redirect()->route('admin.infos.index');

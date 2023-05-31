@@ -20,7 +20,7 @@
                         <input type="text" name="title" class="form-control"> <br>
 
                         <strong> Description :</strong>
-                        <input type="text" name="description" class="form-control"> <br>
+                        <input type="text" name="describtion" class="form-control"> <br>
 
                         <strong> Rasm(png yoki jpg) :</strong>
                         <input type="file" name="icon" class="form-control"> <br>

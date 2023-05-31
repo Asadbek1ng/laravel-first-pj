@@ -45,13 +45,22 @@
                             </td>
                         </tr>
                     @endforeach
+                    <th>
+                        <tr>
+                            <h2>Hello world</h2>
+                            <h2>mini world no morse it </h2>
+                        </tr>
+                    </th>
 
                 </tbody>
             </table>
+            {{ $infos->links() }}
         </div>
 
     </div>
 </main>
+
+<h1>Lorem ipsum laravel crate </h1>
 <!-- MAIN -->
 
 @endsection
