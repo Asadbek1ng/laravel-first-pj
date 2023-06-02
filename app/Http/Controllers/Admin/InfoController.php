@@ -8,55 +8,70 @@ use Illuminate\Http\Request;
 
 class InfoController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $infos = Info::orderBy('id', 'DESC')->paginate(2);
+        $infos = Info::orderBy('id','DESC')->get();
 
         return view('admin.infos.index', compact('infos'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         return view('admin.infos.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $requestData = $request->all();
-
-        if($request->hasFile('icon'))
-        {
-            $file = request()->file('icon');
-            $fileName = time().'-'.$file->getClientoriginalName();
-            $file->move('files/', $fileName);
-            $requestData['icon'] = $fileName;
-        }
         Info::create($request->all());
 
         return redirect()->route('admin.infos.index');
+
     }
 
-    public function show(Info $info)
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
     {
+        $info = Info::find($id);
+
         return view('admin.infos.show', compact('info'));
     }
 
-    public function edit(Info $info)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id)
     {
+        $info = Info::find($id);
+
         return view('admin.infos.edit', compact('info'));
     }
 
-    public function update(Request $request, Info $info)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
-        $info->update($request->all());
-
-        return redirect()->route('admin.infos.index');
+        Info::find($id)->update($request->all());
+        return redirect()->route('admin.infos.index'); 
     }
 
-    public function destroy(Info $info)
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id)
     {
-        $info->delete();
-
-        return redirect()->route('admin.infos.index');
+        Info::find($id)->delete();
+        return redirect()->route('admin.infos.index'); 
     }
 }

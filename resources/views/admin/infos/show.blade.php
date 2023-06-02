@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <td>Description</td>
-                    <td>{{ $info->description }}</td>
+                    <td>{{ $info->describtion }}</td>
                 </tr>
             </table>
         </div>

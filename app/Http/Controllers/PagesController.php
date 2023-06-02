@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 class PagesController extends Controller
 {
     public function welcome(){
+        
         return view('welcome');
     }
 
