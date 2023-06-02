@@ -28,7 +28,7 @@
                         <tr>
                             <td>{{ ++$loop->index }}</td>
                             <td>{{ $item->title }}</td>
-                            <td>{{ $item->description }}</td>
+                            <td>{{ $item->describtion }}</td>
                             <td>{{ $item->created_at }}</td>
                             <td>
 
@@ -47,7 +47,7 @@
                     @endforeach
                 </tbody>
             </table>
-            
+            {{ $infos->links() }}
         </div>
 
     </div>
