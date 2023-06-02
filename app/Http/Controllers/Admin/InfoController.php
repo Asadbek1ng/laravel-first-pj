@@ -13,7 +13,7 @@ class InfoController extends Controller
      */
     public function index()
     {
-        $infos = Info::orderBy('id','DESC')->paginate(2);
+        $infos = Info::orderBy('id','DESC')->paginate(10);
 
         return view('admin.infos.index', compact('infos'));
     }
@@ -31,7 +31,15 @@ class InfoController extends Controller
      */
     public function store(Request $request)
     {
-        Info::create($request->all());
+        $requestData = $request->all();
+
+        if($request->hasFile('icon'))
+        {
+            $requestData['icon'] = $this->file_upload();
+        }
+
+
+        Info::create($requestData);
 
         return redirect()->route('admin.infos.index');
 
@@ -60,18 +68,46 @@ class InfoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Info $info)
     {
-        Info::find($id)->update($request->all());
+
+        $requestData = $request->all();
+
+        if($request->hasFile('icon'))
+        {
+            if(isset($info->icon) && file_exists((public_path('/files/' .$info->icon))))
+            {
+                unlink(public_path('/files/'.$info->icon));
+            }
+            $requestData['icon'] = $this->file_upload();
+        }
+
+        $info->update($requestData);
+
         return redirect()->route('admin.infos.index'); 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Info $info)
     {
-        Info::find($id)->delete();
+        if(isset($info->icon) && file_exists((public_path('/files/' .$info->icon))))
+        {
+            unlink(public_path('/files/'.$info->icon));
+        }
+        $info->delete();
         return redirect()->route('admin.infos.index'); 
+    }
+
+    public function file_upload(){
+        $file = request()->file('icon');
+        $fileName = time(). '-' .$file->getClientOriginalName();
+        $file->move('files/', $fileName);
+        return $fileName;
+    }
+
+    public function file_delete(){
+        
     }
 }

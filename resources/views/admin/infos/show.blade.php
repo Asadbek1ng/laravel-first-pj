@@ -26,6 +26,10 @@
                     <td>Description</td>
                     <td>{{ $info->describtion }}</td>
                 </tr>
+                <tr>
+                    <td>Image</td>
+                    <td>{{ $info->icon }}</td>
+                </tr>
             </table>
         </div>
 

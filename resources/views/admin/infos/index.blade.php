@@ -19,6 +19,7 @@
                         <th>#</th>
                         <th>Title</th>
                         <th>Description</th>
+                        <th>Image</th>
                         <th>Data</th>
                         <th>Action</th>
                     </tr>
@@ -29,6 +30,7 @@
                             <td>{{ ++$loop->index }}</td>
                             <td>{{ $item->title }}</td>
                             <td>{{ $item->describtion }}</td>
+                            <td><img src="/files/{{ $item->icon }}" width="10px"></td>
                             <td>{{ $item->created_at }}</td>
                             <td>
 
