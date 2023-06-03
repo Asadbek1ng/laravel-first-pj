@@ -75,10 +75,7 @@ class InfoController extends Controller
 
         if($request->hasFile('icon'))
         {
-            if(isset($info->icon) && file_exists((public_path('/files/' .$info->icon))))
-            {
-                unlink(public_path('/files/'.$info->icon));
-            }
+            $this->file_delete($info);
             $requestData['icon'] = $this->file_upload();
         }
 
@@ -92,10 +89,7 @@ class InfoController extends Controller
      */
     public function destroy(Info $info)
     {
-        if(isset($info->icon) && file_exists((public_path('/files/' .$info->icon))))
-        {
-            unlink(public_path('/files/'.$info->icon));
-        }
+        $this->file_delete($info);
         $info->delete();
         return redirect()->route('admin.infos.index'); 
     }
@@ -107,7 +101,10 @@ class InfoController extends Controller
         return $fileName;
     }
 
-    public function file_delete(){
-        
+    public function file_delete($info){
+        if(isset($info->icon) && file_exists((public_path('/files/' .$info->icon))))
+        {
+            unlink(public_path('/files/'.$info->icon));
+        }
     }
 }
