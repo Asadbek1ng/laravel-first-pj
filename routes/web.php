@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\HumanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\Admin\InfoController;
+use App\Http\Controllers\Admin\NumberController;
 
 /*
 |---------------------------------------------------------------------
@@ -38,5 +40,7 @@ Route::prefix('admin/')->name('admin.')->group(function(){
     })->name('dashboard');
 
     Route::resource('infos', InfoController::class);
+    Route::resource('numbers', NumberController::class);
+    Route::resource('humans', HumanController::class);
 
 });

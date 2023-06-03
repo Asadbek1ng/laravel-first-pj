@@ -35,15 +35,15 @@
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{ route('admin.numbers.index') }}">
 					<i class='bx bxs-doughnut-chart' ></i>
-					<span class="text">Groups</span>
+					<span class="text">Numbers</span>
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{ route('admin.humans.index') }}">
 					<i class='bx bxs-message-dots' ></i>
-					<span class="text">Teachers</span>
+					<span class="text">Humans</span>
 				</a>
 			</li>
 			<li>
