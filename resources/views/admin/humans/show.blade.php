@@ -11,24 +11,24 @@
         <div class="order">
             <div class="head">
                 <h3>Show</h3>
-                <a class="create__btn" href="{{ route('admin.infos.index') }}"></i>Back</a>
+                <a class="create__btn" href="{{ route('admin.humans.index') }}"></i>Back</a>
             </div>
             <table>
                 <tr>
                     <td>ID</td>
-                    <td>{{ $info->id }}</td>
+                    <td>{{ $human->id }}</td>
                 </tr>
                 <tr>
-                    <td>Title</td>
-                    <td>{{ $info->title }}</td>
+                    <td>Name</td>
+                    <td>{{ $human->name }}</td>
                 </tr>
                 <tr>
-                    <td>Description</td>
-                    <td>{{ $info->describtion }}</td>
-                </tr>
-                <tr>
-                    <td>Image</td>
-                    <td>{{ $info->icon }}</td>
+                    <td>Numbers</td>
+                    <td>
+                    @foreach ($human->numbers as $item )
+                        {{ $item->number }}<br>
+                    @endforeach
+                </td>
                 </tr>
             </table>
         </div>

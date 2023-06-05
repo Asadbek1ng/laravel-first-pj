@@ -31,6 +31,14 @@
                         <input type="number" name="number" value="{{ old('number') }}" class="form-control">
                         @error('number') {{ $message }}<br><br> @enderror
 
+                        <strong> Human :</strong>
+                        <select name="human_id" id=""  class="form-control">
+                            @foreach ($humans as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                            @endforeach
+                        </select><br>
+                        @error('human_id') {{ $message }}<br><br> @enderror
+
                         <input type="submit" value="Qo`shish">
 
                     </form>

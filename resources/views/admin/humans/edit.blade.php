@@ -34,13 +34,7 @@
                         @error('name') {{ $message }}<br><br> @enderror
 
                         <strong> Number :</strong>
-                        <select name="number_id" id=""  class="form-control">
-                            <option value="{{ $human->number_id }}">{{ $human->number->number }}</option>
-                            @foreach ($numbers as $item)
-                                <option value="{{ $item->id }}">{{ $item->number }}</option>
-                            @endforeach
-                        </select><br>
-                        @error('number_id') {{ $message }}<br><br> @enderror
+                 
 
                         <input type="submit" value="Edit">
 

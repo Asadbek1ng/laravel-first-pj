@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Human;
 use Illuminate\Http\Request;
 use App\Models\Number;
 
@@ -26,7 +27,8 @@ class NumberController extends Controller
      */
     public function create()
     {
-        return view('admin.numbers.create');
+        $humans = Human::all();
+        return view('admin.numbers.create', compact('humans'));
     }
 
     /**
@@ -60,7 +62,8 @@ class NumberController extends Controller
      */
     public function edit(Number $number)
     {
-        return view('admin.numbers.edit', compact('number'));
+        $humans = Human::all();
+        return view('admin.numbers.edit', compact('number', 'humans'));
     }
 
     /**

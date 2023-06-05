@@ -27,7 +27,6 @@
                     <tr>
                         <th>#</th>
                         <th>Number</th>
-                        <th>Human</th>
                         <th>Data</th>
                         <th>Action</th>
                     </tr>

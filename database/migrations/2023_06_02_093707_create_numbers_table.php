@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('numbers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('human_id')->nullable();
             $table->bigInteger('number')->nullable();
             $table->timestamps();
         });

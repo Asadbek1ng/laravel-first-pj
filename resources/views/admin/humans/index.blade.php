@@ -37,7 +37,7 @@
                         <tr>
                             <td>{{ ++$loop->index }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->number->number ?? 'Number disconnected'}}</td>
+                            {{-- <td>{{ $item->number->number ?? 'Number disconnected'}}</td> --}}
 
                             <td>{{ $item->created_at }}</td>
                             <td>
