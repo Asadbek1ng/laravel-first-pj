@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Human;
 use Illuminate\Http\Request;
 use App\Models\Number;
+use Illuminate\Support\Facades\DB;
 
 class NumberController extends Controller
 {
@@ -16,7 +17,12 @@ class NumberController extends Controller
      */
     public function index()
     {
-        $numbers = Number::orderBy('id', 'DESC')->paginate(5);
+        $numbers = DB::table('streets')
+        ->leftJoin('regions', 'streets.id_region', '=', 'regions.id')
+        ->leftJoin('districts', 'streets.id_district', '=', 'districts.id')
+        ->select('streets.*', 'regions.reg_name_uz')->offSet(499)->limit(100)->get();
+
+        return $numbers;
         return view('admin.numbers.index', compact('numbers'));
     }
 
@@ -39,6 +45,11 @@ class NumberController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'number'=>'required|integer|min:3|digits_between:1,10|regex:/^[0-9]+(,[0-9]+){0,3}$/',
+        ]);
+
         Number::create($request->all());
         return redirect()->route('admin.numbers.index')->with('success', 'Success done');
     }

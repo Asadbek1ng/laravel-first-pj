@@ -31,6 +31,10 @@ class InfoController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title'=>'required',
+            'description'=>'required'
+        ]);
         $requestData = $request->all();
 
         if($request->hasFile('icon'))
