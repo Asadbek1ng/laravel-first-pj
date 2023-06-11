@@ -30,6 +30,7 @@ Route::get('/gallery', [PagesController::class, 'gallery'])->name('gallery');
 Route::get('/blogs', [PagesController::class, 'blogs'])->name('blogs');
 
 Route::post('/order/store', [PagesController::class, 'store'])->name('order.store');
+Route::get('/', 'welcomeRouteGet');
 
 // Admin routes start
 

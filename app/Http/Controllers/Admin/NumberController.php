@@ -25,7 +25,7 @@ class NumberController extends Controller
         return $numbers;
         return view('admin.numbers.index', compact('numbers'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
