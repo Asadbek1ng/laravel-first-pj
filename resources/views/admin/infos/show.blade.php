@@ -24,11 +24,7 @@
                 </tr>
                 <tr>
                     <td>Description</td>
-                    <td>{!! $info->describtion !!}</td>
-                </tr>
-                <tr>
-                    <td>Image</td>
-                    <td>{{ $info->icon }}</td>
+                    <td>{!! $info->description !!}</td>
                 </tr>
             </table>
         </div>

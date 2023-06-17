@@ -9,7 +9,6 @@ class Human extends Model
 {
     use HasFactory;
 
-
     protected $guarded = [];
 
     public function numbers(){

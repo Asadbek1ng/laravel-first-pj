@@ -2,39 +2,33 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\AuditEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Info;
 use Illuminate\Http\Request;
+use App\Http\Requests\InfoStoreRequest;
 
 class InfoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $infos = Info::orderBy('id','DESC')->paginate(10);
+        // return Info::count();
+        $infos = Info::orderBy('id', 'DESC')->paginate(6);
 
         return view('admin.infos.index', compact('infos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
+        if(Info::count() >= 6)
+            return redirect()->route('admin.infos.index')->with('warning','Ma`lumot yetarli');
+
         return view('admin.infos.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(InfoStoreRequest $request)
     {
-        $request->validate([
-            'title'=>'required',
-            'describtion'=>'required'
-        ]);
+
         $requestData = $request->all();
 
         if($request->hasFile('icon'))
@@ -42,73 +36,69 @@ class InfoController extends Controller
             $requestData['icon'] = $this->file_upload();
         }
 
-
         Info::create($requestData);
 
-        return redirect()->route('admin.infos.index');
+        $user = auth()->user()->name;
 
+        event(new AuditEvent($user, 'infos', 'add', json_encode($requestData)));
+
+        // return $event ;
+
+        return redirect()->route('admin.infos.index')->with('success','Successfully added');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
+    public function show(Info $info)
     {
-        $info = Info::find($id);
-
         return view('admin.infos.show', compact('info'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
+    public function edit(Info $info)
     {
-        $info = Info::find($id);
-
         return view('admin.infos.edit', compact('info'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Info $info)
     {
+        request()->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'icon' => 'mimes:png,jpg|max:2048'
+        ]);
 
         $requestData = $request->all();
 
         if($request->hasFile('icon'))
         {
-            $this->file_delete($info);
+            if(isset($info->icon) && file_exists(public_path('/files/'.$info->icon))){
+                unlink(public_path('/files/'.$info->icon));
+            }
             $requestData['icon'] = $this->file_upload();
         }
 
         $info->update($requestData);
 
-        return redirect()->route('admin.infos.index'); 
+        return redirect()->route('admin.infos.index')->with('success','Successfully Update');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Info $info)
     {
-        $this->file_delete($info);
+        $user = auth()->user()->name;
+        event(new AuditEvent($user, 'infos', 'delete', $info));
+
+        if(isset($info->icon) && file_exists(public_path('/files/'.$info->icon)))
+        {
+            unlink(public_path('/files/'.$info->icon));
+        }
         $info->delete();
-        return redirect()->route('admin.infos.index'); 
+
+        return redirect()->route('admin.infos.index')->with('warning','Successfully Delete');
     }
 
     public function file_upload(){
         $file = request()->file('icon');
-        $fileName = time(). '-' .$file->getClientOriginalName();
+        $fileName = time().'-'.$file->getClientOriginalName();
         $file->move('files/', $fileName);
         return $fileName;
     }
 
-    public function file_delete($info){
-        if(isset($info->icon) && file_exists((public_path('/files/' .$info->icon))))
-        {
-            unlink(public_path('/files/'.$info->icon));
-        }
-    }
 }

@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 class HumanController extends Controller
 {
     /**
-     * face aciunr hd db db-service
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -29,8 +28,7 @@ class HumanController extends Controller
     public function create()
     {
         // $numbers = Number::doesntHave('human')->get();
-        $humans = Human::all();
-        return view('admin.humans.create', compact('humans'));
+        return view('admin.humans.create');
     }
 
     /**
@@ -53,7 +51,7 @@ class HumanController extends Controller
      */
     public function show(Human $human)
     {
-        //
+        return view('admin.humans.show', compact('human'));
     }
 
     /**
@@ -64,7 +62,6 @@ class HumanController extends Controller
      */
     public function edit(Human $human)
     {
-        // $numbers = Number::doesntHave('human')->get();
 
         return view('admin.humans.edit', compact('human'));
     }
@@ -94,5 +91,3 @@ class HumanController extends Controller
         return redirect()->route('admin.humans.index')->with('success', 'Delete done');
     }
 }
-
- 

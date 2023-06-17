@@ -33,8 +33,7 @@
                         <input type="text" name="name" value="{{ $human->name }}" class="form-control">
                         @error('name') {{ $message }}<br><br> @enderror
 
-                        <strong> Number :</strong>
-                 
+                        
 
                         <input type="submit" value="Edit">
 

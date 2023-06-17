@@ -3,6 +3,17 @@
 
 @section('content')
 
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
     <!-- MAIN -->
         <main>
 
@@ -21,7 +32,7 @@
                         <input type="text" name="title" value="{{ $info->title }}" class="form-control"> <br>
 
                         <strong> Description :</strong>
-                        <input type="text" name="describtion" value="{{ $info->describtion }}" class="form-control"> <br>
+                        <input type="text" name="description" value="{{ $info->description }}" class="form-control"> <br>
 
                         <strong> Rasm(png yoki jpg) :</strong>
                         <input type="file" name="icon" class="form-control"> <br>

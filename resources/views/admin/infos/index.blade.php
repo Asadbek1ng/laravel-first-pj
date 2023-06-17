@@ -5,7 +5,16 @@
 
 <!-- MAIN -->
 <main>
-
+        @if ($message = Session::get('warning'))
+            <div class="alert alert-warning">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
+        @if ($message = Session::get('success'))
+            <div class="alert alert-success">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
 
     <div class="table-data">
         <div class="order">
@@ -18,7 +27,7 @@
                     <tr>
                         <th>#</th>
                         <th>Title</th>
-                        <th>Description</th>
+                        
                         <th>Image</th>
                         <th>Data</th>
                         <th>Action</th>
@@ -29,8 +38,8 @@
                         <tr>
                             <td>{{ ++$loop->index }}</td>
                             <td>{{ $item->title }}</td>
-                            <td>{!! $item->describtion !!}</td>
-                            <td><img src="/files/{{ $item->icon }}" width="10px"></td>
+
+                            <td><img src="/files/{{ $item->icon }}" width="60px"></td>
                             <td>{{ $item->created_at }}</td>
                             <td>
 
@@ -47,9 +56,10 @@
                             </td>
                         </tr>
                     @endforeach
+
                 </tbody>
             </table>
-            {{ $infos->links() }}
+            {{$infos->links()}}
         </div>
 
     </div>

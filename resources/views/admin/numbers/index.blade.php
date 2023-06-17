@@ -27,6 +27,7 @@
                     <tr>
                         <th>#</th>
                         <th>Number</th>
+                        <th>Human</th>
                         <th>Data</th>
                         <th>Action</th>
                     </tr>
@@ -36,7 +37,7 @@
                         <tr>
                             <td>{{ ++$loop->index }}</td>
                             <td>{{ $item->number }}</td>
-                            <td>{{ $item->human->name ?? 'Number disconnected'}}</td>
+                            <td>{{ $item->name ?? 'Bog`lanmagan'}}</td>
                             <td>{{ $item->created_at }}</td>
                             <td>
 

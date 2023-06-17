@@ -31,20 +31,18 @@
                         <strong> number :</strong>
                         <input type="number" name="number" value="{{ $number->number }}" class="form-control"> <br>
 
-
                         <strong> Human :</strong>
                         <select name="human_id" id=""  class="form-control">
                             <option value="{{ $number->human_id }}">{{ $number->human->name }}</option>
                             @foreach ($humans as $item)
-                            @if ( $number->human_id != $item->id )
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                            @endif
+                                @if ($number->human_id != $item->id)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endif
                             @endforeach
                         </select><br>
                         @error('human_id') {{ $message }}<br><br> @enderror
 
                         <input type="submit" value="Edit">
-                        
 
                     </form>
                 </div>

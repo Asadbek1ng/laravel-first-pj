@@ -10,8 +10,8 @@ active
     <div class="container-fluid bg-primary px-0 px-md-5 mb-5">
         <div class="row align-items-center px-3">
             <div class="col-lg-6 text-center text-lg-left">
-                <h4 class="text-white mb-4 mt-5 mt-lg-0">Shavkat Mirziyoyev:</h4>
-                <h1 class="display-3 font-weight-bold text-white">"Maktabgacha ta'lim sohasida zamonaviy tizim yaratish muhim vazifamizdir"</h1>
+                <h4 class="text-white mb-4 mt-5 mt-lg-0">@lang('home.name')</h4>
+                <h1 class="display-3 font-weight-bold text-white">"@lang('home.header_title')"</h1>
             </div>
             <div class="col-lg-6 text-center text-lg-right">
                 <img class="img-fluid mt-5" src="/assets/img/header.png" alt="">

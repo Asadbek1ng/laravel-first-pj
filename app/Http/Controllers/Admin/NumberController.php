@@ -20,12 +20,12 @@ class NumberController extends Controller
         $numbers = DB::table('streets')
         ->leftJoin('regions', 'streets.id_region', '=', 'regions.id')
         ->leftJoin('districts', 'streets.id_district', '=', 'districts.id')
-        ->select('streets.*', 'regions.reg_name_uz')->offSet(499)->limit(100)->get();
+        ->select('streets.*', 'regions.reg_name_uz', 'districts.d_name_uz')->offset(499)->limit(100)->get();
 
         return $numbers;
         return view('admin.numbers.index', compact('numbers'));
     }
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -45,10 +45,8 @@ class NumberController extends Controller
      */
     public function store(Request $request)
     {
-
-        $request->validate([
-            'number'=>'required|integer|min:3|digits_between:1,10|regex:/^[0-9]+(,[0-9]+){0,3}$/',
-        ]);
+        if(Number::where('human_id', $request->human_id)->count() >= 3)
+            return back()->with('warning', 'Limit to`lgan');
 
         Number::create($request->all());
         return redirect()->route('admin.numbers.index')->with('success', 'Success done');

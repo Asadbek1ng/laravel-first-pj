@@ -3,7 +3,6 @@
 
 @section('content')
 
-
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -14,7 +13,6 @@
                 </ul>
             </div>
         @endif
-
 
     <!-- MAIN -->
         <main>
@@ -30,10 +28,12 @@
                     <form class="create__inputs" action="{{ route('admin.infos.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <strong> title :</strong>
-                        <input type="text" name="title" class="form-control"> <br>
+                        <input type="text" name="title" value="{{ old('title') }}" class="form-control">
+                        @error('title') {{ $message }}<br><br> @enderror
 
                         <strong> Description :</strong>
-                        <textarea name="describtion" class="ckeditor form-control" cols="30" rows="30" value="{!! old('describtion') !!}">{!! old('describtion') !!}</textarea>
+                        <textarea class="ckeditor form-control" name="description" value="{{ old('description') }}">{{ old('description') }}</textarea>
+                        @error('description') {{ $message }}<br><br> @enderror
 
                         <strong> Rasm(png yoki jpg) :</strong>
                         <input type="file" name="icon" class="form-control"> <br>

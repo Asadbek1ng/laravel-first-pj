@@ -93,7 +93,7 @@
 		</ul>
 		<ul class="side-menu">
 			<li>
-				<a href="#">
+				<a href="/profile">
 					<i class='bx bxs-cog' ></i>
 					<span class="text">Settings</span>
 				</a>
@@ -101,7 +101,11 @@
 			<li>
 				<a href="#" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>
-					<span class="text">Logout</span>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button class="text">Logout</button>
+                    </form>
+
 				</a>
 			</li>
 		</ul>

@@ -23,12 +23,14 @@
                     <td>{{ $human->name }}</td>
                 </tr>
                 <tr>
-                    <td>Numbers</td>
-                    <td>
-                    @foreach ($human->numbers as $item )
-                        {{ $item->number }}<br>
-                    @endforeach
-                </td>
+                    <td>Numbers : </td>
+
+                        <td>
+                            @foreach ($human->numbers as $item)
+                            {{ $item->number }}<br>
+                            @endforeach
+                        </td>
+
                 </tr>
             </table>
         </div>
