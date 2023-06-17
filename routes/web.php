@@ -30,7 +30,7 @@ Route::get('/gallery', [PagesController::class, 'gallery'])->name('gallery');
 Route::get('/blogs', [PagesController::class, 'blogs'])->name('blogs');
 
 Route::post('/order/store', [PagesController::class, 'store'])->name('order.store');
-Route::get('/', 'welcomeRouteGet');
+
 
 // Admin routes start
 
@@ -38,7 +38,7 @@ Route::prefix('admin/')->name('admin.')->group(function(){
 
     Route::get('dashboard', function(){
         return view('admin.layouts.dashboard');
-    })->name('dashboard');
+    })->name('dashboard')->middleware('test');
 
     Route::resource('infos', InfoController::class);
     Route::resource('numbers', NumberController::class);

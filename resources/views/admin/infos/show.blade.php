@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <td>Description</td>
-                    <td>{{ $info->describtion }}</td>
+                    <td>{!! $info->describtion !!}</td>
                 </tr>
                 <tr>
                     <td>Image</td>

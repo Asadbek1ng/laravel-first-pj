@@ -33,7 +33,7 @@ class InfoController extends Controller
     {
         $request->validate([
             'title'=>'required',
-            'description'=>'required'
+            'describtion'=>'required'
         ]);
         $requestData = $request->all();
 
